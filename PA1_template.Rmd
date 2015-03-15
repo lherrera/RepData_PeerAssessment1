@@ -42,7 +42,7 @@ stepsPerDay <- aggregate(steps ~ date, activity, sum)
 ggplot( stepsPerDay, aes ( steps) ) +
         geom_histogram(fill = NA, color="black", binwidth=5000) + 
         labs(title="Histogram of steps taken each day", 
-             x = "Step per days", y = "Number of days") + 
+             x = "Steps", y = "Number of days") + 
         theme_bw()
 ```        
 
@@ -59,7 +59,7 @@ median(stepsPerDay$steps, na.rm=TRUE)
 stepsPerInterval <- aggregate(steps ~ interval,  activity, mean)
 ggplot(stepsPerInterval, aes(interval, steps)) + 
         geom_line() + 
-        labs(title="Average daily activity Pattern", 
+        labs(title="Average daily activity pattern", 
              x="5-minute Interval", y="Average number of steps") +  
         theme_bw()
 ```
