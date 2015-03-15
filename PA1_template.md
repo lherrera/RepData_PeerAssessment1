@@ -14,15 +14,11 @@ output:
 library(knitr)
 library(ggplot2)
 
-# set global options
+# set knitr global options to ensure all code is shown by default
 opts_chunk$set(echo=TRUE)
 
 # To ensure English locale is used for Date/Time
 Sys.setlocale(category="LC_TIME", locale="C")
-```
-
-```
-## [1] "C"
 ```
 
 
@@ -158,41 +154,17 @@ median(stepsPerDay2$steps, na.rm=TRUE)
 ## [1] 10766.19
 ```
 
-These values do not differ significantly from the ones calculated in the previous section:
-
-
-```r
-mean(stepsPerDay$steps, na.rm=TRUE)
-```
-
-```
-## [1] 10766.19
-```
-
-```r
-median(stepsPerDay$steps, na.rm=TRUE)
-```
-
-```
-## [1] 10765
-```
-
+These values do not differ significantly from the ones calculated in the previous section.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-1. The followign code creates a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
-
+1. The following code creates a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+ 
 
 ```r
-daytype <- function(date) {
-        if ( weekdays(date) %in% c("Saturday", "Sunday")) {
-                "weekend"
-        } else {
-                "weekday"
-        }
-}
-activity2$daytype <- as.factor(sapply(activity2$date, daytype))
+activity2$daytype <- "weekday"
+activity2$daytype[weekdays(activity2$date) %in% c("Saturday","Sunday")] <- "weekend"
 ```
 
 2. The following code Makes a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 

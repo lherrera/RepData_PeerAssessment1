@@ -207,14 +207,11 @@ hr {
 library(knitr)
 library(ggplot2)
 
-# set global options
+# set knitr global options to ensure all code is shown by default
 opts_chunk$set(echo=TRUE)
 
 # To ensure English locale is used for Date/Time
 Sys.setlocale(category=&quot;LC_TIME&quot;, locale=&quot;C&quot;)
-</code></pre>
-
-<pre><code>## [1] &quot;C&quot;
 </code></pre>
 
 <h2>Loading and preprocessing the data</h2>
@@ -347,34 +344,16 @@ ggplot( stepsPerDay2, aes ( steps) ) +
 <pre><code>## [1] 10766.19
 </code></pre>
 
-<p>These values do not differ significantly from the ones calculated in the previous section:</p>
-
-<pre><code class="r">mean(stepsPerDay$steps, na.rm=TRUE)
-</code></pre>
-
-<pre><code>## [1] 10766.19
-</code></pre>
-
-<pre><code class="r">median(stepsPerDay$steps, na.rm=TRUE)
-</code></pre>
-
-<pre><code>## [1] 10765
-</code></pre>
+<p>These values do not differ significantly from the ones calculated in the previous section.</p>
 
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 
 <ol>
-<li>The followign code creates a new factor variable in the dataset with two levels &ndash; &ldquo;weekday&rdquo; and &ldquo;weekend&rdquo; indicating whether a given date is a weekday or weekend day.</li>
+<li>The following code creates a new factor variable in the dataset with two levels &ndash; &ldquo;weekday&rdquo; and &ldquo;weekend&rdquo; indicating whether a given date is a weekday or weekend day.</li>
 </ol>
 
-<pre><code class="r">daytype &lt;- function(date) {
-        if ( weekdays(date) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;)) {
-                &quot;weekend&quot;
-        } else {
-                &quot;weekday&quot;
-        }
-}
-activity2$daytype &lt;- as.factor(sapply(activity2$date, daytype))
+<pre><code class="r">activity2$daytype &lt;- &quot;weekday&quot;
+activity2$daytype[weekdays(activity2$date) %in% c(&quot;Saturday&quot;,&quot;Sunday&quot;)] &lt;- &quot;weekend&quot;
 </code></pre>
 
 <ol>
